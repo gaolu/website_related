@@ -94,7 +94,7 @@ font-size: 12px;
             document.getElementById("main").innerHTML = "<strong>" + m + "</strong>";
             for(var i = 0; i < 3; i++){
                 document.getElementById("bartext" + (i + 1)).innerHTML = cities[i].households;
-                document.getElementById("bar" + (i + 1)).style.width = cities[i].households + "px";
+                document.getElementById("bar" + (i + 1)).style.width = ((cities[i].households/householdMax) * 100) + '%';
             };
         }
         
@@ -102,17 +102,25 @@ font-size: 12px;
             document.getElementById("main").innerHTML = "<strong>" + m + "</strong>";
             for(var i = 0; i < 3; i++){
                 document.getElementById("bartext" + (i + 1)).innerHTML = cities[i].units;
-                document.getElementById("bar" + (i + 1)).style.width = cities[i].units + "px";
+                document.getElementById("bar" + (i + 1)).style.width = ((cities[i].units/unitMax) * 100) + '%';
             };
         }
     }
 
+    var myPop = [cities[0].population, cities[1].population, cities[2].population];
+    var myHouseholds = [cities[0].households, cities[1].households, cities[2].households];
+    var myUnits = [cities[0].units, cities[1].units, cities[2].units];
+    
+    var popMax = Math.max.apply(Math, myPop);
+    var householdMax = Math.max.apply(Math, myHouseholds);
+    var unitMax = Math.max.apply(Math, myUnits);
+    
     function writeData(){
         console.log("in writeData");
         for(var i = 0; i < cities.length; i++){
             document.getElementById("name" + (i + 1)).innerHTML=cities[i].name;
             document.getElementById("bartext" + (i + 1)).innerHTML=cities[i].population;
-            document.getElementById("bar" + (i + 1)).style.width=cities[i].population + "px";
+            document.getElementById("bar" + (i + 1)).style.width=((cities[i].population/popMax) * 100) + '%';
             document.getElementById("bar" + (i + 1)).title = cities[i].tip;
         };
     }
